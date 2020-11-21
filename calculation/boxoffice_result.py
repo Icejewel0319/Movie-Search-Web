@@ -53,5 +53,4 @@ print(result_dict)
 for i in result_dict:
     dict1 = {}
     dict1[i] = result_dict[i]
-    print(dict1)
     requests.patch(url="https://dsci551-a1e31.firebaseio.com/Movie_info_result/BoxofficeAnalysis/.json", json=dict1)
