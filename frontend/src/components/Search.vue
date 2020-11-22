@@ -1,22 +1,24 @@
 <template>
   <div class="search">
-    <h2>Search by {{ msg }}</h2>
+    <!-- <h2>Search by {{ msg }}</h2> -->
     <b-row>
     <b-col><b-form-input v-model="actorName" :placeholder="'Enter ' + msg"></b-form-input></b-col>
     <b-col lg="2"><b-button @click="search" pill variant="outline-success">search <b-icon icon="search"></b-icon></b-button></b-col>
     </b-row>
-    <b-button variant="outline-secondary" @click="hideResult" v-if="click">close search result <b-icon icon="x-circle"></b-icon></b-button>
-    <SearchResult v-if="click"  :searchResult='searchResult'/>
+    <b-button variant="outline-secondary" @click="hideResult" >close search result <b-icon icon="x-circle"></b-icon></b-button>
+    <SearchResultCom v-if="movie_show"  :searchResult='searchResult'/>
+    <YearResultCom v-if="year_show" :searchResult="searchResult"/>
   </div>
 </template>
 
 <script>
-import SearchResult from './SearchResult.vue'
+import SearchResultCom from './SearchResult.vue'
+import YearResultCom from './ReleasedYearResult.vue'
 const axios = require('axios'),
       util  = require('util');
 
 export default {
-  components: { SearchResult },
+  components: { SearchResultCom, YearResultCom },
   name: 'search',
   props: {
     msg: String
@@ -24,7 +26,9 @@ export default {
   data() {
     return {
       actorName: "",
-      click: false,
+      movie_show: false,
+      actor_show: false,
+      year_show: false,
       searchResult: {
         
       }
@@ -32,11 +36,15 @@ export default {
   },
   methods: {
     search: function(){
+      var type = this._props.msg.split(" ").join("_")
+      console.log(type)
       //change val
-      this.click = true
+      if(type == "Movie_Title") this.movie_show = true
+      else if(type == "Actor's_name") this.actor_show = true
+      else this.year_show = true
       this.searchResult.name = this.actorName
       //send request to backend/database for search result
-      var url = util.format("http://localhost:8081/test?name=%s", this.actorName)
+      var url = util.format("http://localhost:8081/%s?name=%s", type, this.actorName)
       axios
         .get(url)
         .then(response =>(
@@ -46,7 +54,9 @@ export default {
         .catch(err => console.log(err))
     },
     hideResult: function(){
-      this.click = false;
+      this.movie_show = false;
+      this.actor_show = false;
+      this.year_show = false;
     }
   }
 }

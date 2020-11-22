@@ -12,20 +12,20 @@
     <b-col></b-col>
     </b-row>
     <SearchCom v-if="tab==1" msg="Actor's Name"/>
-    <SearchCom v-else-if="tab==2" msg="Movie Tile"/>
-    <SearchCom v-else msg="Release Year"/>
+    <SearchCom v-else-if="tab==2" msg="Movie Title"/>
+    <SearchCom v-else msg="Released Year"/>
+    <BottonCom></BottonCom>
   </div>
 </template>
 
 <script>
 import Title from './components/Title.vue'
 import SearchCom from './components/Search.vue'
+import BottonCom from './components/Botton.vue'
 
 export default {
   name: 'App',
-  components: {
-    Title, SearchCom
-  },
+  components: { Title, SearchCom, BottonCom },
   data() {
     return {
       tab: 1
@@ -45,7 +45,6 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   margin-top: 60px;
 }
