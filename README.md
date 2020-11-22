@@ -1,6 +1,6 @@
-# vue_demo
+# Movie Search Website
 
-## Project setup
+## Frontend Project setup
 ```
 npm install
 ```
@@ -19,6 +19,18 @@ npm run build
 ```
 npm run lint
 ```
+
+## Backend Project setup
+```
+npm install
+```
+
+### Start backend
+```
+node app.js
+```
+
+
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).

@@ -1,14 +1,26 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
+  <div class="botton">
+      <!-- <h1>hahah</h1> -->
   </div>
 </template>
 
 <script>
+
 export default {
-  name: 'HelloWorld',
+  name: 'info',
   props: {
-    msg: String
+    
+  },
+  data() {
+    return {
+      
+    }
+  },
+  methods: {
+    
+  },
+  watch: {
+    
   }
 }
 </script>
@@ -16,7 +28,4 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-.hello {
-  text-align: center;
-}
 </style>
