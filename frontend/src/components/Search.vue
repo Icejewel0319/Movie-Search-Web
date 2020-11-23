@@ -8,17 +8,19 @@
     <b-button variant="outline-secondary" @click="hideResult" >close search result <b-icon icon="x-circle"></b-icon></b-button>
     <SearchResultCom v-if="movie_show"  :searchResult='searchResult'/>
     <YearResultCom v-if="year_show" :searchResult="searchResult"/>
+    <ActorResultCom v-if="actor_show" :searchResult="searchResult"></ActorResultCom>
   </div>
 </template>
 
 <script>
 import SearchResultCom from './SearchResult.vue'
 import YearResultCom from './ReleasedYearResult.vue'
+import ActorResultCom from './ActorResult.vue'
 const axios = require('axios'),
       util  = require('util');
 
 export default {
-  components: { SearchResultCom, YearResultCom },
+  components: { SearchResultCom, YearResultCom, ActorResultCom },
   name: 'search',
   props: {
     msg: String
@@ -40,7 +42,7 @@ export default {
       console.log(type)
       //change val
       if(type == "Movie_Title") this.movie_show = true
-      else if(type == "Actor's_name") this.actor_show = true
+      else if(type == "Actor's_Name") this.actor_show = true
       else this.year_show = true
       this.searchResult.name = this.actorName
       //send request to backend/database for search result

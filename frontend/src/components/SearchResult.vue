@@ -14,7 +14,7 @@
     <p>Plot: {{searchResult.Plot}}</p>
     </b-col>
     <b-col cols=3>
-      Ratings: 
+      <h4>Ratings: </h4>
       <p v-for="item in ratings" :key="item.id">  {{item.Source}}: {{item.Value}}</p>
 
     </b-col>
@@ -84,6 +84,16 @@ export default {
           fontColor: "#666",
           display: true
         },
+        scales: {
+          yAxes:[
+            {
+              ticks:  {
+                max: 270000,
+                min: 0
+              }
+            }
+          ]
+        },
         responsive: true,
         maintainAspectRatio: false
       }
@@ -101,7 +111,7 @@ export default {
       }
       this.pieChartOptions = {
         title: {
-          text: "Foreign vs Domestic Gross",
+          text: "Foreign vs Domestic Gross in Percentage",
           fontColor: "#666",
           display: true
         },
@@ -111,7 +121,7 @@ export default {
       this.pieChartLoaded = true
       //美国境内首映票房和境内总票房的比例饼状图
       this.domePieChartData = {
-        labels:["Domestic", "Foreign"],
+        labels:["Domestic opening", "Domestic gross"],
         datasets:[
           {
             label: 'percentage',
