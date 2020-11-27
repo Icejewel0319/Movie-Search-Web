@@ -1,10 +1,16 @@
+const { stdout, stderr } = require("process");
+
 const express = require("express"),
     request = require("request"),
     // firebase = require('firebase/app'),
-    util = require('util');
+    util = require('util'),
+    exec = require('child_process').exec;
 var app = express();
 app.use(express.json());
-let url = "https://dsci551-a1e31.firebaseio.com/%s/.json"
+let url = "https://dsci551-a1e31.firebaseio.com/%s/.json",
+    actor_firebase = "Actor_info_result",
+    movie_firebase = "Movie_info_result",
+    boxof_firebase = "Box_office_ranking_result"
 
 
 //跨域问题
@@ -19,28 +25,42 @@ app.all('*', function(req, res, next) {
 
 //get addr address data from angular and return weather info
 app.get("/Actor's_Name", function(req, res){
-    console.log(req.query);
-    request(url, (err, response)=>{
-        // console.log(response.body)
-        res.send({
-            msg: "actor"
-        });
+    var actor_url = util.format(url, actor_firebase);
+    var file = "../calculation/webpage1_actor.py"
+    var name = req.query.input
+    var name_new = '"' + name.split(" ").join(" ") +'"'
+    var cmd = util.format("python %s %s", file, name_new)
+    exec(cmd, (err, stdout, stderr)=>{
+        if(err) console.log(err);
+        else if (stdout) {
+            request(actor_url, (err, response)=>{
+                res.send(response.body);
+            })
+        }
+        else console.log(stderr)
     })
-    
 });
+
 app.get("/Movie_Title", function(req, res){
-    console.log(req.query);
-    var movie_url = util.format(url, "Movie_info_result")
-    request(movie_url, (err, response)=>{
-        // console.log(response.body)
-        res.send(response.body);
+    var movie_url = util.format(url, movie_firebase);
+    var file = "../calculation/webpage2_movie.py"
+    var title = req.query.input
+    var title_new = '"' + title.split(" ").join(" ") +'"'
+    var cmd = util.format("python %s %s", file, title_new)
+    exec(cmd, (err, stdout, stderr)=>{
+        if(err) console.log(err);
+        else if (stdout) {
+            request(movie_url, (err, response)=>{
+                res.send(response.body);
+            })
+        }
+        else console.log(stderr)
     })
-    
 });
 
 app.get("/Released_Year", function(req, res){
     console.log(req.query);
-    var year_url = util.format(url, "Box_office_ranking_result")
+    var year_url = util.format(url, boxof_firebase)
     request(year_url, (err, response)=>{
         if(err) console.log(err)
         // console.log(response.body)
