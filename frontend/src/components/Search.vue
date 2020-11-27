@@ -46,7 +46,7 @@ export default {
       else this.year_show = true
       this.searchResult.name = this.actorName
       //send request to backend/database for search result
-      var url = util.format("http://localhost:8081/%s?name=%s", type, this.actorName)
+      var url = util.format("http://localhost:8081/%s?input=%s", type, this.actorName)
       axios
         .get(url)
         .then(response =>(

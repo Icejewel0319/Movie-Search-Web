@@ -6,6 +6,7 @@ from collections import defaultdict
 #main function
 if __name__ == '__main__':
     expected_movie = str(sys.argv[1])
+    print(expected_movie)
     data_movie = requests.get('https://dsci551-a1e31.firebaseio.com/Movie_info.json')
     data_movie = json.loads(data_movie.text)
     result = {}
