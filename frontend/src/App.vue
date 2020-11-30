@@ -1,7 +1,7 @@
 <template>
   <div id="app" >
     <!-- <img alt="logo" src="./assets/video-camera.png"> -->
-    <Title msg="Welcome to Movie Search"/>
+    <Title/>
 
     
 
@@ -16,24 +16,23 @@
     </b-row>
     
     <!-- router -->
-    <h1>router here</h1>
     <router-view></router-view>
 
-    <!-- <SearchCom v-if="tab==1" msg="Actor's Name"/>
+    <SearchCom v-if="tab==1" msg="Actor's Name"/>
     <SearchCom v-else-if="tab==2" msg="Movie Title"/>
-    <SearchCom v-else msg="Released Year"/> -->
+    <SearchCom v-else msg="Released Year"/>
   </div>
 </template>
 
 <script>
 import Title from './components/Title.vue'
-// import SearchCom from './components/Search.vue'
+import SearchCom from './components/Search.vue'
 
 export default {
   name: 'App',
   components: { 
     Title, 
-    // SearchCom, 
+    SearchCom, 
   },
   data() {
     return {

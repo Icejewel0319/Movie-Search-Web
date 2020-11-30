@@ -9,8 +9,7 @@
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
         <router-link to="/member">Members</router-link>
-        <router-link to="/bar">bar</router-link>
-        <!-- <b-nav-item href="#" disabled>Disabled</b-nav-item> -->
+        <router-link to="/search">search</router-link>
       </b-navbar-nav>
       <b-navbar-nav class="ml-auto">
         <b-button variant="link" href="https://github.com/Icejewel0319/Movie-Search-Web">
