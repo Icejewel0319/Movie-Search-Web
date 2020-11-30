@@ -2,20 +2,20 @@
   <div class="info">
     <h3>{{ searchResult.Title }} ({{searchResult.Year}})</h3>
     <b-row>
-    <b-col><b-img :src="poster" fluid></b-img></b-col>
+    <b-col><b-img :src="searchResult.Poster" fluid></b-img></b-col>
     <b-col cols=7>
     <p>Actors: 
-        <span v-for="item in actors" :key="item.id">{{item}} / </span> ...
+        <span v-for="item in searchResult.Actors" :key="item.id">{{item}} / </span> ...
     </p>
     <p>Director(s): {{searchResult.Director}}</p>
-    <p>Genre: <span v-for="item in genre" :key="item.id"> {{item}} / </span> ...</p>
+    <p>Genre: <span v-for="item in searchResult.Genre" :key="item.id"> {{item}} / </span> ...</p>
     <p>Language: {{searchResult.Language}}</p>
     <p>Run Time: {{searchResult.Runtime}}</p>
     <p>Plot: {{searchResult.Plot}}</p>
     </b-col>
     <b-col cols=3>
       <h4>Ratings: </h4>
-      <p v-for="item in ratings" :key="item.id">  {{item.Source}}: {{item.Value}}</p>
+      <p v-for="item in searchResult.Ratings" :key="item.id">  {{item.Source}}: {{item.Value}}</p>
 
     </b-col>
     </b-row>
@@ -41,7 +41,6 @@ export default {
   },
   data() {
     return {
-      poster: "",
       actors:[],
       genre: [],
       ratings: [],
@@ -61,11 +60,6 @@ export default {
   },
   watch: {
     searchResult: function(newVal){
-      this.poster = newVal.Poster
-      this.actors = newVal.Actors
-      this.genre  = newVal.Genre
-      this.ratings = newVal.Ratings
-
       var boAnalysis = newVal.BoxofficeAnalysis
       //海外+美国境内票房数字的柱状图
       this.barChartData = {

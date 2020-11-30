@@ -1,11 +1,11 @@
 <template>
   <div id="app" >
     <!-- <img alt="logo" src="./assets/video-camera.png"> -->
-    <Title msg="Welcome to Movie Search"/>
+    <Title/>
 
     
 
-    <b-row class="bnts">
+    <!-- <b-row class="bnts">
       <b-col></b-col>
       <b-col>Choose what you want to search: </b-col>
       <b-col ><b-button @click="tabChange" data-id="1" variant="outline-secondary">Actor</b-button></b-col>
@@ -13,10 +13,9 @@
       <b-col ><b-button @click="tabChange" data-id="3" variant="outline-secondary">Released Year</b-button></b-col>
       <b-col></b-col>
       <b-col></b-col>
-    </b-row>
+    </b-row> -->
     
     <!-- router -->
-    <h1>router here</h1>
     <router-view></router-view>
 
     <!-- <SearchCom v-if="tab==1" msg="Actor's Name"/>

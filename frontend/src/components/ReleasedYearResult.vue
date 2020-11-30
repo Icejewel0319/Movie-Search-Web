@@ -3,24 +3,27 @@
     <!-- <h3>{{ searchResult}})</h3> -->
     <!-- <LineChartCom v-if="barChartLoaded" :barChartData='barChartData' :barChartOptions="barChartOptions"></LineChartCom> -->
     <BarChartCom v-if="barChartLoaded" :barChartData='barChartData' :barChartOptions="barChartOptions"></BarChartCom>
-    <LineChartCom v-if="comprLineChartLoaded" :lineChartData='comprLineChartData' :lineChartOptions="comprLineChartOptions"></LineChartCom>
+    <BarChartCom v-if="comprBarChartLoaded" :barChartData='comprBarChartData' :barChartOptions="comprBarChartOptions"></BarChartCom>
   </div>
 </template>
 
 <script>
-import LineChartCom from "./LineChart.vue"
+// import LineChartCom from "./LineChart.vue"
 import BarChartCom from "./BarChart.vue"
 export default {
-  components: { LineChartCom, BarChartCom },
+  components: { 
+    //   LineChartCom, 
+      BarChartCom 
+    },
   name: 'info',
   props: {
     searchResult: Object
   },
   data() {
     return {
-      comprLineChartLoaded:false,
-      comprLineChartData:{},
-      comprLineChartOptions:{},
+      comprBarChartLoaded:false,
+      comprBarChartData:{},
+      comprBarChartOptions:{},
       barChartLoaded:false,
       barChartData:{},
       barChartOptions:{}
@@ -30,19 +33,29 @@ export default {
     
   },
   watch: {
-    searchResult: function(newVal){
+    searchResult: function(new_value){
+        var year = Object.keys(new_value)[0]
+        var newVal = new_value[year]
         this.barChartData = {
             labels:[],
-            datasets:[{
-                label: "Thousand Dollar",
-                backgroundColor: '#f87979',
-                data:[]
-            }]
+            datasets:[
+                {
+                    label: "Domestic Gross (Thousand Dollars)",
+                    backgroundColor: 'rgb(141,165,208)',
+                    data:[]
+                },
+                {
+                    label: "Worldwide Gross (Thousand Dollars)",
+                    backgroundColor: 'rgb(229,122,15)',
+                    data:[]
+                }
+            ]
         }
         for(var i in newVal){
             var cur = newVal[i]
-            this.barChartData.labels.push(cur.Title)
-            this.barChartData.datasets[0].data.push(cur.Worldwide_gross/1000)
+            this.barChartData.labels.push(cur.title)
+            this.barChartData.datasets[0].data.push(cur["Domestic_Gross(dollars)"]/1000)
+            this.barChartData.datasets[1].data.push(cur["Worldwide_Gross(dollars)"]/1000)
         }
         this.barChartOptions = {
             title: {
@@ -60,20 +73,20 @@ export default {
         }
         this.barChartLoaded = true
         
-        this.comprLineChartData = {
+        this.comprBarChartData = {
             labels:[],
             datasets:[
                 {
-                    label: "Worldwide Gross",
-                    backgroundColor: 'blue',
-                    yAxesGroup:'A',
+                    label: "Worldwide Gross (Thousand Dollars)",
+                    fillColor: 'rgb(229,122,15)',
+                    yAxisID:'gross',
                     data:[],
                     type: 'bar'
                 },
                 {
                     label: "IMDB Score",
-                    yAxesGroup: 'B',
-                    borderColor: 'yellow',
+                    yAxisID: 'score',
+                    borderColor: 'red',
                     data:[],
                     type: 'bubble'
                 }
@@ -81,20 +94,23 @@ export default {
         }
         for(var j in newVal){
             var comprCur = newVal[j]
-            this.comprLineChartData.labels.push(comprCur.Title)
-            this.comprLineChartData.datasets[0].data.push(comprCur.Worldwide_gross/100000000)
-            this.comprLineChartData.datasets[1].data.push(comprCur.IMDB_score)
+            this.comprBarChartData.labels.push(comprCur.title)
+            this.comprBarChartData.datasets[0].data.push(comprCur["Worldwide_Gross(dollars)"]/1000)
+            this.comprBarChartData.datasets[1].data.push(comprCur["imdb_score"])
         }
-        this.comprLineChartOptions = {
+        this.comprBarChartOptions = {
             scales: {
                 yAxes: [{
-                    id: 'A',
-                    type: 'linear',
+                    id: 'gross',
+                    // type: 'linear',
                     position: 'left',
+                    ticks: {
+                        min: 0
+                    }
                 }, 
                 {
                     id: 'score',
-                    // type: 'linear',
+                    type: 'linear',
                     position: 'right',
                     ticks: {
                         max: 10,
@@ -111,7 +127,7 @@ export default {
             responsive: true,
             maintainAspectRatio: false
         }
-        this.comprLineChartLoaded = true
+        this.comprBarChartLoaded = true
     }
       
 
