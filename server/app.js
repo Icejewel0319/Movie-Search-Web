@@ -7,7 +7,7 @@ const express = require("express"),
     exec = require('child_process').exec;
 var app = express();
 app.use(express.json());
-let url = "https://dsci551-a1e31.firebaseio.com/%s/.json",
+let url = "https://dsci551-b9bb2.firebaseio.com/%s/.json",
     actor_firebase = "Actor_info_result",
     movie_firebase = "Movie_info_result",
     boxof_firebase = "Box_office_ranking_result"
@@ -24,22 +24,41 @@ app.all('*', function(req, res, next) {
 });
 
 //get addr address data from angular and return weather info
+// app.get("/Actor's_Name", function(req, res){
+//     var actor_url = util.format(url, actor_firebase);
+//     var file = "../calculation/webpage1_actor.py"
+//     var name = req.query.input
+//     var name_new = '"' + name.split(" ").join(" ") +'"'
+//     var cmd = util.format("python %s %s", file, name_new)
+//     exec(cmd, (err, stdout, stderr)=>{
+//         if(err) console.log(err);
+//         else if (stdout) {
+//             request(actor_url, (err, response)=>{
+//                 console.log(response.body)
+//                 res.send(response.body);
+//             })
+//         }
+//         else console.log(stderr)
+//     })
+// });
+
+
 app.get("/Actor's_Name", function(req, res){
     var actor_url = util.format(url, actor_firebase);
     var file = "../calculation/webpage1_actor.py"
     var name = req.query.input
     var name_new = '"' + name.split(" ").join(" ") +'"'
     var cmd = util.format("python %s %s", file, name_new)
-    exec(cmd, (err, stdout, stderr)=>{
-        if(err) console.log(err);
-        else if (stdout) {
+    // exec(cmd, (err, stdout, stderr)=>{
+    //     if(err) console.log(err);
+    //     else if (stdout) {
             request(actor_url, (err, response)=>{
                 console.log(response.body)
                 res.send(response.body);
             })
-        }
-        else console.log(stderr)
-    })
+        // }
+        // else console.log(stderr)
+    // })
 });
 
 app.get("/Movie_Title", function(req, res){
