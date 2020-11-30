@@ -34,6 +34,7 @@ app.get("/Actor's_Name", function(req, res){
         if(err) console.log(err);
         else if (stdout) {
             request(actor_url, (err, response)=>{
+                console.log(response.body)
                 res.send(response.body);
             })
         }
@@ -47,16 +48,35 @@ app.get("/Movie_Title", function(req, res){
     var title = req.query.input
     var title_new = '"' + title.split(" ").join(" ") +'"'
     var cmd = util.format("python %s %s", file, title_new)
-    exec(cmd, (err, stdout, stderr)=>{
-        if(err) console.log(err);
-        else if (stdout) {
+    // exec(cmd, (err, stdout, stderr)=>{
+    //     if(err) console.log(err);
+    //     else if (stdout) {
             request(movie_url, (err, response)=>{
+                console.log(response.body);
                 res.send(response.body);
             })
-        }
-        else console.log(stderr)
-    })
+        // }
+    //     else console.log(stderr)
+    // })
 });
+
+// app.get("/Movie_Title", function(req, res){
+//     var movie_url = util.format(url, movie_firebase);
+//     var file = "../calculation/webpage2_movie.py"
+//     var title = req.query.input
+//     var title_new = '"' + title.split(" ").join(" ") +'"'
+//     var cmd = util.format("python %s %s", file, title_new)
+//     exec(cmd, (err, stdout, stderr)=>{
+//         if(err) console.log(err);
+//         else if (stdout) {
+//             request(movie_url, (err, response)=>{
+//                 res.send(response.body);
+//             })
+//         }
+//         else console.log(stderr)
+//     })
+// });
+
 
 app.get("/Released_Year", function(req, res){
     console.log(req.query);

@@ -1,31 +1,40 @@
 <template>
-  <div id="app" class="container">
+  <div id="app" >
     <!-- <img alt="logo" src="./assets/video-camera.png"> -->
     <Title msg="Welcome to Movie Search"/>
-    <b-row>
-    <b-col></b-col>
-    <b-col>Choose what you want to search: </b-col>
-    <b-col ><b-button @click="tabChange" data-id="1" variant="outline-secondary">Actor</b-button></b-col>
-    <b-col ><b-button @click="tabChange" data-id="2" variant="outline-secondary">Movie</b-button></b-col>
-    <b-col ><b-button @click="tabChange" data-id="3" variant="outline-secondary">Released Year</b-button></b-col>
-    <b-col></b-col>
-    <b-col></b-col>
+
+    
+
+    <b-row class="bnts">
+      <b-col></b-col>
+      <b-col>Choose what you want to search: </b-col>
+      <b-col ><b-button @click="tabChange" data-id="1" variant="outline-secondary">Actor</b-button></b-col>
+      <b-col ><b-button @click="tabChange" data-id="2" variant="outline-secondary">Movie</b-button></b-col>
+      <b-col ><b-button @click="tabChange" data-id="3" variant="outline-secondary">Released Year</b-button></b-col>
+      <b-col></b-col>
+      <b-col></b-col>
     </b-row>
-    <SearchCom v-if="tab==1" msg="Actor's Name"/>
+    
+    <!-- router -->
+    <h1>router here</h1>
+    <router-view></router-view>
+
+    <!-- <SearchCom v-if="tab==1" msg="Actor's Name"/>
     <SearchCom v-else-if="tab==2" msg="Movie Title"/>
-    <SearchCom v-else msg="Released Year"/>
-    <BottonCom></BottonCom>
+    <SearchCom v-else msg="Released Year"/> -->
   </div>
 </template>
 
 <script>
 import Title from './components/Title.vue'
-import SearchCom from './components/Search.vue'
-import BottonCom from './components/Botton.vue'
+// import SearchCom from './components/Search.vue'
 
 export default {
   name: 'App',
-  components: { Title, SearchCom, BottonCom },
+  components: { 
+    Title, 
+    // SearchCom, 
+  },
   data() {
     return {
       tab: 1
@@ -46,7 +55,10 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  margin-top: 60px;
+  /* margin-top: 60px; */
 }
 
+.bnts {
+  margin-top: 20px;
+}
 </style>

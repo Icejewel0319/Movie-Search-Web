@@ -14,7 +14,8 @@
     "core-js": "^3.6.5",
     "util": "^0.12.3",
     "vue": "^2.6.11",
-    "vue-chartjs": "^3.5.1"
+    "vue-chartjs": "^3.5.1",
+    "vue-router": "^3.4.9"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
