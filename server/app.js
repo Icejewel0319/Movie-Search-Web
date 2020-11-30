@@ -49,16 +49,17 @@ app.get("/Actor's_Name", function(req, res){
     var name = req.query.input
     var name_new = '"' + name.split(" ").join(" ") +'"'
     var cmd = util.format("python %s %s", file, name_new)
-    // exec(cmd, (err, stdout, stderr)=>{
-    //     if(err) console.log(err);
-    //     else if (stdout) {
+    exec(cmd, (err, stdout, stderr)=>{
+        if(err) console.log(err);
+        else if (stdout) {
             request(actor_url, (err, response)=>{
+                if(err) console.log(err)
                 console.log(response.body)
                 res.send(response.body);
             })
-        // }
-        // else console.log(stderr)
-    // })
+        }
+        else console.log(stderr)
+    })
 });
 
 app.get("/Movie_Title", function(req, res){

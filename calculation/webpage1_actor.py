@@ -15,7 +15,7 @@ if __name__ == '__main__':
         actors = db.actors
         cursor = actors.find({"Name": expected_actor},{"Movie":0} )
         list_cur = list(cursor)
-        print(list_cur)
+        #print(list_cur)
 
         # firebase
         data_movie = requests.get('https://dsci551-a1e31.firebaseio.com/Movie_info.json')
@@ -25,7 +25,6 @@ if __name__ == '__main__':
         result = {}
         result["Name"] = expected_actor
         result["Image"] = list_cur[0]['Image']
-
         knowfor_dic = {}
         movie_dic = {}
         year_list = []
@@ -49,20 +48,22 @@ if __name__ == '__main__':
                     result["Know_for"] = knowfor_dic
                     count = count + 1
         #print(knowfor_dic)
-        #print(result)
 
-        for i in result:
-            url_result = 'https://dsci551-b9bb2.firebaseio.com/Actor_info_result/' + actor_id + '.json'
-            data_actor = json.dumps(result)
+        new_result = {}
+        new_result[actor_id] = result
+        new_result['Found'] = 1
+
+        for i in new_result:
+            url_result = 'https://dsci551-b9bb2.firebaseio.com/Actor_info_result/.json'
+            data_actor = json.dumps(new_result)
             response = requests.put(url_result, data_actor)
+        print(1)
 
-        found_code = {"found":1}
-        url_foundcode = 'https://dsci551-b9bb2.firebaseio.com/Actor_info_result/.json'
-        data_foundcode = json.dumps(found_code)
-        response = requests.patch(url_foundcode, data_foundcode)
+
 
     except (IndexError,KeyError):
         url_foundcode = 'https://dsci551-b9bb2.firebaseio.com/Actor_info_result/.json'
         found_code = {"found":0}
         data_foundcode = json.dumps(found_code)
         response = requests.put(url_foundcode,data_foundcode)
+        print(1)
