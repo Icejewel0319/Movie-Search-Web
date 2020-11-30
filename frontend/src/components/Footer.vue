@@ -1,5 +1,5 @@
 <template>
-  <div class="botton">
+  <div class="footer">
       <!-- <h1>hahah</h1> -->
   </div>
 </template>
@@ -7,7 +7,7 @@
 <script>
 
 export default {
-  name: 'info',
+  name: 'footer',
   props: {
     
   },

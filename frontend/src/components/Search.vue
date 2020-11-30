@@ -1,5 +1,5 @@
 <template>
-  <div class="search">
+  <div class="search container">
     <!-- <h2>Search by {{ msg }}</h2> -->
     <b-row>
     <b-col><b-form-input v-model="actorName" :placeholder="'Enter ' + msg"></b-form-input></b-col>
