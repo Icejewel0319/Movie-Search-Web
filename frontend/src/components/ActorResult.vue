@@ -1,7 +1,6 @@
 <template>
   <div class="info">
     <h3>{{ name }} </h3>
-    <!-- <h3>{{ imdbid }} </h3> -->
     <b-row>
         <b-col cols=2><b-img :src="img" fluid></b-img></b-col>
         <b-col>
@@ -37,11 +36,14 @@ export default {
   },
   watch: {
     searchResult: function(newVal){
-        this.imdbid = Object.keys(newVal)
+      
+        this.imdbid = Object.keys(newVal)[1]
+        console.log(Object.keys(newVal))
         this.name = newVal[this.imdbid].Name;
         this.img = newVal[this.imdbid].Image;
-
-        this.know_for = newVal[this.imdbid].Known_for;
+        // console.log(this.name)
+        this.know_for = newVal[this.imdbid].Know_for;
+        console.log(this.know_for)
     }
   }
 }

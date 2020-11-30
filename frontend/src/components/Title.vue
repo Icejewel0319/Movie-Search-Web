@@ -1,15 +1,17 @@
 <template>
   <div id="nar">
-  <b-navbar toggleable="lg" type="dark" variant="primary">
+  <b-navbar toggleable="lg" type="dark" variant="dark">
     <img class="logo" src="../assets/clapperboard.png" alt="logo">
     <b-navbar-brand href="/">Movie Search</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
     <b-collapse id="nav-collapse" is-nav>
-      <b-navbar-nav>
-        <router-link to="/member">Members</router-link>
-        <router-link to="/search">search</router-link>
+      <b-navbar-nav >
+        <router-link to="/searchActor" class="link">Actor </router-link>
+        <router-link to="/searchMovie" class="link">Movie Title </router-link>
+        <router-link to="/searchYear" class="link">Released Year </router-link>
+        <router-link to="/member" class="link">Members </router-link>
       </b-navbar-nav>
       <b-navbar-nav class="ml-auto">
         <b-button variant="link" href="https://github.com/Icejewel0319/Movie-Search-Web">
@@ -33,8 +35,9 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-.nav {
-  
+.link {
+  color: white;
+  margin-right: 20px;
 }
 
 .logo {
